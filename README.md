@@ -14,7 +14,7 @@ sudo docker run simon300000/ddathome-nodejs
 ```
 #### 长期后台运行
 ```shell
-sudo docker run -d simon300000/ddathome-nodejs
+sudo docker run -d -e NICKNAME=你想要的昵称 simon300000/ddathome-nodejs
 ```
 
 ### Go版Docker
