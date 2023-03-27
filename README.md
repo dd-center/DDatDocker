@@ -2,8 +2,8 @@
 Docker版的各个DDatHome  
 安装Docker：https://docs.docker.com/engine/install/  
 
-#### 安装docker的小记：  
-1. 记得安装完后去这里跟着继续配置一下docker权限和开机启动docker：https://docs.docker.com/engine/install/linux-postinstall/
+#### 安装完后docker的小记：  
+1. 安装完后来这里跟着继续配置一下docker权限和开机启动docker：https://docs.docker.com/engine/install/linux-postinstall/
 ##### 这里我来做一个文档简短的总结和翻译：
 ```bash
 
@@ -20,7 +20,7 @@ sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 ```
 
-2. 推荐给docker设置一下log最大限制  
+2. 推荐给docker设置一下log最大限制防止硬盘被log吃光（我被这么教训过）  
 linux去修改`/etc/docker/daemon.json`成如下
 ```json
 {
