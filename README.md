@@ -69,3 +69,24 @@ sudo docker run imlonghao/ddathome-go
 ```
 sudo docker run -d --restart=always imlonghao/ddathome-go
 ```
+
+## 自己build Dockerfile
+适合ARM版用户和特别需求，上面的几个就不太行都只是支持linux x86类型的，arm就比较难受了  
+
+### 选择自己需要的版本
+这里选择nodejs版作为演示，因为Simon经常维护  
+
+#### 下载repo
+```sh
+git clone https://github.com/dd-center/DDatHome-nodejs.git
+cd DDatHome-nodejs
+```
+#### build并且tag docker image
+```sh
+docker image build --tag ddathomenodejs .
+```
+#### 长期运行build好的image
+```sh
+sudo docker run -d -e NICKNAME=你想要的昵称 --restart=always docker.io/library/ddathomenodejs
+```
+注意最后运行的image名字是你刚才生成的信息  
