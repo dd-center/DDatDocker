@@ -2,20 +2,24 @@
 Docker版的各个DDatHome  
 安装Docker：https://docs.docker.com/engine/install/  
 
-#### 安装完后docker的小记：  
+### 安装完后docker的小记：  
 1. 安装完后来这里跟着继续配置一下docker权限和开机启动docker：https://docs.docker.com/engine/install/linux-postinstall/
-##### 这里我来做一个文档简短的总结和翻译：
-```bash
+#### 这里我来做一个文档简短的总结和翻译：
 
-# 让你省去每次都打sudo来运行docker的麻烦
+让你省去每次都打sudo来运行docker的麻烦
+```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
+```
 
-# 验证下能否不用sudo就用docker成功
+验证下能否不用sudo就用docker成功
+```bash
 docker run hello-world
+```
 
-# 开启docker开机启动
+开启docker开机启动
+```bash
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 ```
