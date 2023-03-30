@@ -75,7 +75,7 @@ sudo docker run -d --restart=always imlonghao/ddathome-go
 ```
 
 ## 自己build Dockerfile
-适合ARM版用户和特别需求，上面的几个就不太行都只是支持linux x86类型的，arm就比较难受了  
+适合特别需求
 
 ### 选择自己需要的版本
 这里选择nodejs版作为演示，因为Simon经常维护  
