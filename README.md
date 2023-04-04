@@ -89,8 +89,8 @@ cd DDatHome-nodejs
 ```sh
 docker image build --tag ddathomenodejs .
 ```
-#### 长期运行build好的image
+#### 长期运行build好的image（记得换一个UUID）
 ```sh
-sudo docker run -d -e NICKNAME=你想要的昵称 --restart=always docker.io/library/ddathomenodejs
+sudo docker run -d -e NICKNAME=无敌飞雪amdCA -e UUID=bcd462b0-4202-448d-9f70-e57477782f79 --restart=always simon300000/ddathome-nodejs
 ```
 注意最后运行的image名字是你刚才生成的信息  
