@@ -55,7 +55,7 @@ sudo docker run simon300000/ddathome-nodejs
 ```
 #### 长期后台运行
 ```shell
-sudo docker run -d -e NICKNAME=你想要的昵称 --restart=always simon300000/ddathome-nodejs
+sudo docker run -d -e NICKNAME=你的昵称 -e UUID=bcd462b0-4202-448d-9f70-e57477782f79 --restart=always simon300000/ddathome-nodejs
 ```
 
 ### Go版Docker
@@ -91,6 +91,6 @@ docker image build --tag ddathomenodejs .
 ```
 #### 长期运行build好的image（记得换一个UUID）
 ```sh
-sudo docker run -d -e NICKNAME=无敌飞雪amdCA -e UUID=bcd462b0-4202-448d-9f70-e57477782f79 --restart=always simon300000/ddathome-nodejs
+sudo docker run -d -e NICKNAME=你的昵称 -e UUID=bcd462b0-4202-448d-9f70-e57477782f79 --restart=always simon300000/ddathome-nodejs
 ```
 注意最后运行的image名字是你刚才生成的信息  
