@@ -1,9 +1,12 @@
 # DDatDocker
 Docker版的各个DDatHome  
-安装Docker：https://docs.docker.com/engine/install/  
-
-### 安装完后docker的小记：  
-1. 安装完后来这里跟着继续配置一下docker权限和开机启动docker：https://docs.docker.com/engine/install/linux-postinstall/
+一键安装安装Docker：
+```
+curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
+```
+### 安装完后配置docker：  
+1. 安装完后来这里跟着继续配置一下docker权限和开机启动docker  
+原英文文档：https://docs.docker.com/engine/install/linux-postinstall/
 #### 这里我来做一个文档简短的总结和翻译：
 
 让你省去每次都打sudo来运行docker的麻烦
