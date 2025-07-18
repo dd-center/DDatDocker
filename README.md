@@ -1,6 +1,6 @@
 # DDatDocker
 Docker版的各个DDatHome  
-一键安装安装Docker：
+一键安装Docker：
 ```
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
