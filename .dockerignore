@@ -8,3 +8,5 @@
 !LICENSE
 !lib/
 !lib/**
+!licenses/
+!licenses/node-LICENSE
