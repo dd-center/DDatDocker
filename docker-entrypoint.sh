@@ -32,7 +32,7 @@ while kill -0 "$worker" 2>/dev/null; do
     wait "$worker" 2>/dev/null || true
     exit 1
   fi
-  sleep 2 &
+  sleep 5 &
   sleeper=$!
   wait "$sleeper" 2>/dev/null || true
 done

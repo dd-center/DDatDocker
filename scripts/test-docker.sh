@@ -6,7 +6,16 @@ network="dd-test-$suffix"
 mock="dd-mock-$suffix"
 worker="dd-worker-$suffix"
 volume="dd-identity-$suffix"
+project="dd-compose-$suffix"
+override=$(mktemp)
+export STATUS_PORT=0
+compose() { docker compose -p "$project" -f compose.yaml -f "$override" "$@"; }
 cleanup() {
+  if [ -s "$override" ]; then
+    compose logs --tail=10 2>/dev/null || true
+    compose down -v >/dev/null 2>&1 || true
+  fi
+  rm -f "$override"
   docker logs "$worker" 2>/dev/null || true
   docker rm -f "$worker" "$mock" >/dev/null 2>&1 || true
   docker network rm "$network" >/dev/null 2>&1 || true
@@ -61,3 +70,39 @@ start_worker
 wait_ready
 [ "$identity" = "$(docker exec "$worker" cat /data/identity.json)" ]
 echo 'Docker reconnect, watchdog restart, identity persistence and shutdown passed.'
+
+# Exercise the documented Compose path with empty nickname/UUID, on the same mock network.
+cat > "$override" <<EOF
+services:
+  ddathome:
+    image: $image
+    environment:
+      URL: ws://mock:18080
+      ALLOWED_TASK_HOSTS: mock
+      LIMIT: '0'
+      INTERVAL: '100'
+      NICKNAME: ''
+      UUID: ''
+networks:
+  default:
+    external: true
+    name: $network
+EOF
+compose up -d
+count=0
+until compose exec -T ddathome sh /app/healthcheck.sh; do
+  count=$((count + 1))
+  [ "$count" -lt 60 ] || { echo 'Compose readiness timed out'; exit 1; }
+  sleep 1
+done
+compose exec -T ddathome node -e 'fetch("http://127.0.0.1:9464/status").then(r=>r.json()).then(s=>{if(!s.identity.uuid||!s.identity.nickname||s.valid<1)process.exit(1);console.log(s)})'
+compose_identity=$(compose exec -T ddathome cat /data/identity.json)
+compose up -d --force-recreate
+count=0
+until compose exec -T ddathome sh /app/healthcheck.sh; do
+  count=$((count + 1))
+  [ "$count" -lt 60 ] || exit 1
+  sleep 1
+done
+[ "$compose_identity" = "$(compose exec -T ddathome cat /data/identity.json)" ]
+echo 'Zero-configuration Compose startup and recreation passed.'
