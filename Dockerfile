@@ -9,6 +9,7 @@ RUN apk add --no-cache libstdc++ ca-certificates \
     && addgroup -g 1000 node && adduser -D -u 1000 -G node node \
     && mkdir /data && chown node:node /data
 COPY --from=dependencies /usr/local/bin/node /usr/local/bin/node
+COPY --from=dependencies /usr/local/LICENSE /usr/local/share/licenses/node/LICENSE
 WORKDIR /app
 ENV NODE_ENV=production DOCKER=true DATA_DIR=/data
 COPY --from=dependencies /app/node_modules ./node_modules
