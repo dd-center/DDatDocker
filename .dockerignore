@@ -1,0 +1,12 @@
+*
+!package.json
+!package-lock.json
+!index.js
+!healthcheck.js
+!healthcheck.sh
+!docker-entrypoint.sh
+!LICENSE
+!lib/
+!lib/**
+!licenses/
+!licenses/node-LICENSE

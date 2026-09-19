@@ -1,0 +1,18 @@
+{
+  "name": "ddathome-docker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Recoverable, bounded DD@Home worker for Docker",
+  "license": "MIT",
+  "engines": { "node": ">=24 <25" },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test test/*.test.js",
+    "test:soak": "node --max-old-space-size=96 scripts/soak.js",
+    "smoke:live": "node scripts/smoke-live.js",
+    "test:docker": "sh scripts/test-docker.sh"
+  },
+  "dependencies": {
+    "ws": "8.21.3"
+  }
+}

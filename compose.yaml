@@ -1,0 +1,39 @@
+services:
+  ddathome:
+    build: .
+    image: ddathome:local
+    pull_policy: build
+    restart: unless-stopped
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 64
+    mem_limit: 192m
+    cpus: 1.0
+    stop_grace_period: 10s
+    environment:
+      URL: ${URL:-wss://cluster.vtbs.moe}
+      NICKNAME: ${NICKNAME:-}
+      UUID: ${UUID:-}
+      HIDE: ${HIDE:-false}
+      INTERVAL: ${INTERVAL:-1280}
+      HTTP_CONCURRENCY: ${HTTP_CONCURRENCY:-2}
+      HTTP_TIMEOUT_MS: ${HTTP_TIMEOUT_MS:-10000}
+      LIMIT: ${LIMIT:-5}
+      VERBOSE: ${VERBOSE:-false}
+      COOLDOWN_MS: ${COOLDOWN_MS:-60000}
+      COOLDOWN_MAX_MS: ${COOLDOWN_MAX_MS:-300000}
+      NODE_OPTIONS: --max-old-space-size=96
+    volumes:
+      - identity:/data
+    ports:
+      - "127.0.0.1:${STATUS_PORT:-9464}:9464"
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+volumes:
+  identity:
